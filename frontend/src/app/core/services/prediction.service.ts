@@ -50,7 +50,7 @@ export class PredictionService {
   constructor(private api: ApiService) {}
 
   getPrediction(crop: string, district: string): Observable<PredictionResult> {
-    return this.api.get<PredictionResult>('/api/predictions', { crop, district });
+    return this.api.get<PredictionResult>('/predictions', { crop, district });
   }
 
   getRecommendations(
@@ -60,12 +60,12 @@ export class PredictionService {
     const params: Record<string, string> = { district };
     if (season) params['season'] = season;
     return this.api.get<CropRecommendation[]>(
-      '/api/predictions/recommendations',
+      '/predictions/recommendations',
       params
     );
   }
 
   calculateProfit(estimate: ProfitEstimate): Observable<ProfitResult> {
-    return this.api.post<ProfitResult>('/api/predictions/profit', estimate);
+    return this.api.post<ProfitResult>('/predictions/profit', estimate);
   }
 }

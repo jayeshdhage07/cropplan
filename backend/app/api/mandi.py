@@ -13,7 +13,7 @@ from app.database.session import get_db
 from app.schemas.mandi import MandiPriceListResponse, MandiPriceResponse, MandiTrendResponse
 from app.services.mandi_service import MandiService
 
-router = APIRouter(prefix="/api/mandi", tags=["Mandi Prices"])
+router = APIRouter(prefix="/mandi", tags=["Mandi Prices"])
 
 
 @router.get("/prices", response_model=MandiPriceListResponse)

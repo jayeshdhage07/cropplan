@@ -7,7 +7,7 @@ from fastapi import HTTPException, status
 
 from app.models.user import User
 from app.schemas.auth import UserRegister, UserLogin, TokenResponse
-from app.core.security import hash_password, verify_password, create_access_token
+from app.core.security import hash_password, verify_password, create_access_token, create_refresh_token, decode_refresh_token
 from app.core.logging import logger
 
 
@@ -90,14 +90,43 @@ class AuthService:
                 headers={"WWW-Authenticate": "Bearer"},
             )
 
-        # Create JWT token with user claims
-        token = create_access_token(
-            data={"sub": str(user.id), "role": user.role, "name": user.name}
-        )
+        # Create JWT tokens
+        token_data = {"sub": str(user.id), "role": user.role, "name": user.name}
+        access_token = create_access_token(data=token_data)
+        refresh_token = create_refresh_token(data=token_data)
 
         logger.info(f"User logged in: {user.mobile}")
         return TokenResponse(
-            access_token=token,
+            access_token=access_token,
+            refresh_token=refresh_token,
+            user_id=str(user.id),
+            name=user.name,
+            role=user.role,
+        )
+
+    @staticmethod
+    def refresh_token(db: Session, refresh_token: str) -> TokenResponse:
+        """
+        Generate new access token from refresh token.
+        """
+        payload = decode_refresh_token(refresh_token)
+        user_id = payload.get("sub")
+        
+        user = db.query(User).filter(User.id == user_id).first()
+        if not user:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="User not found",
+                headers={"WWW-Authenticate": "Bearer"},
+            )
+            
+        token_data = {"sub": str(user.id), "role": user.role, "name": user.name}
+        new_access_token = create_access_token(data=token_data)
+        new_refresh_token = create_refresh_token(data=token_data)
+        
+        return TokenResponse(
+            access_token=new_access_token,
+            refresh_token=new_refresh_token,
             user_id=str(user.id),
             name=user.name,
             role=user.role,

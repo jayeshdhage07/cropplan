@@ -12,7 +12,7 @@ from app.schemas.crop import CropCreate, CropResponse, CropListResponse
 from app.services.crop_service import CropService
 from app.core.security import get_current_user, require_admin
 
-router = APIRouter(prefix="/api/crops", tags=["Crops"])
+router = APIRouter(prefix="/crops", tags=["Crops"])
 
 
 @router.get("", response_model=CropListResponse)

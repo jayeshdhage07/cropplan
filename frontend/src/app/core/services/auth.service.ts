@@ -23,6 +23,7 @@ export interface RegisterRequest {
 
 export interface TokenResponse {
   access_token: string;
+  refresh_token: string;
   token_type: string;
   user_id: string;
   name: string;
@@ -41,7 +42,8 @@ export interface UserProfile {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private readonly TOKEN_KEY = 'crop_predict_token';
+  private readonly TOKEN_KEY = 'crop_predict_access_token';
+  private readonly REFRESH_TOKEN_KEY = 'crop_predict_refresh_token';
   private readonly USER_KEY = 'crop_predict_user';
 
   /** Reactive signal for current user */
@@ -58,9 +60,9 @@ export class AuthService {
   ) {}
 
   login(credentials: LoginRequest): Observable<TokenResponse> {
-    return this.api.post<TokenResponse>('/api/auth/login', credentials).pipe(
+    return this.api.post<TokenResponse>('/auth/login', credentials).pipe(
       tap((response) => {
-        this.storeToken(response.access_token);
+        this.storeTokens(response.access_token, response.refresh_token);
         const user: UserProfile = {
           id: response.user_id,
           name: response.name,
@@ -74,11 +76,19 @@ export class AuthService {
   }
 
   register(data: RegisterRequest): Observable<UserProfile> {
-    return this.api.post<UserProfile>('/api/auth/register', data);
+    return this.api.post<UserProfile>('/auth/register', data);
   }
 
   logout(): void {
+    this.api.post('/auth/logout', {}).subscribe({
+      next: () => this.clearSession(),
+      error: () => this.clearSession(),
+    });
+  }
+
+  private clearSession(): void {
     localStorage.removeItem(this.TOKEN_KEY);
+    localStorage.removeItem(this.REFRESH_TOKEN_KEY);
     localStorage.removeItem(this.USER_KEY);
     this._currentUser.set(null);
     this.router.navigate(['/auth/login']);
@@ -88,8 +98,24 @@ export class AuthService {
     return localStorage.getItem(this.TOKEN_KEY);
   }
 
+  getRefreshToken(): string | null {
+    return localStorage.getItem(this.REFRESH_TOKEN_KEY);
+  }
+
+  refreshToken(): Observable<TokenResponse> {
+    const refreshToken = this.getRefreshToken();
+    if (!refreshToken) {
+      throw new Error('No refresh token available');
+    }
+    return this.api.post<TokenResponse>('/auth/refresh', { refresh_token: refreshToken }).pipe(
+      tap((response) => {
+        this.storeTokens(response.access_token, response.refresh_token);
+      })
+    );
+  }
+
   getProfile(): Observable<UserProfile> {
-    return this.api.get<UserProfile>('/api/auth/me').pipe(
+    return this.api.get<UserProfile>('/auth/me').pipe(
       tap((user) => {
         this.storeUser(user);
         this._currentUser.set(user);
@@ -97,8 +123,9 @@ export class AuthService {
     );
   }
 
-  private storeToken(token: string): void {
-    localStorage.setItem(this.TOKEN_KEY, token);
+  private storeTokens(accessToken: string, refreshToken: string): void {
+    localStorage.setItem(this.TOKEN_KEY, accessToken);
+    localStorage.setItem(this.REFRESH_TOKEN_KEY, refreshToken);
   }
 
   private storeUser(user: UserProfile): void {

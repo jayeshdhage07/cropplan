@@ -49,10 +49,10 @@ export class MandiService {
   getTrends(crop: string, district?: string, years = 3): Observable<MandiTrend[]> {
     const params: Record<string, string | number> = { crop, years };
     if (district) params['district'] = district;
-    return this.api.get<MandiTrend[]>('/api/mandi/trends', params);
+    return this.api.get<MandiTrend[]>('/mandi/trends', params);
   }
 
   getDistricts(): Observable<string[]> {
-    return this.api.get<string[]>('/api/mandi/districts');
+    return this.api.get<string[]>('/mandi/districts');
   }
 }

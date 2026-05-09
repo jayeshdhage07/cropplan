@@ -22,10 +22,15 @@ class Settings(BaseSettings):
     # Database
     DATABASE_URL: str = "postgresql+pg8000://crop_user:crop_password@localhost:5432/crop_predict_db"
 
+    # API Configuration
+    API_V1_STR: str = "/api/v1"
+
     # JWT Authentication
     JWT_SECRET_KEY: str = "dev-secret-key-change-in-production"
+    JWT_REFRESH_SECRET_KEY: str = "dev-refresh-secret-key-change-in-production"
     JWT_ALGORITHM: str = "HS256"
     JWT_ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
+    JWT_REFRESH_TOKEN_EXPIRE_DAYS: int = 7
 
     # CORS
     CORS_ORIGINS: str = "http://localhost:4200,http://localhost:3000"

@@ -19,7 +19,7 @@ from app.schemas.prediction import (
 from app.services.prediction_service import PredictionService
 from app.core.security import get_current_user
 
-router = APIRouter(prefix="/api/predictions", tags=["Predictions"])
+router = APIRouter(prefix="/predictions", tags=["Predictions"])
 
 # Service instance
 prediction_service = PredictionService()

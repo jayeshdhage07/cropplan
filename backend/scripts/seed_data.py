@@ -18,6 +18,8 @@ from app.database.session import SessionLocal
 from app.models.crop import Crop
 from app.models.mandi_price import MandiPrice
 from app.models.user import User
+from app.models.prediction import Prediction
+from app.models.expense import Expense
 from app.core.security import hash_password
 from app.core.logging import logger
 
@@ -146,11 +148,11 @@ def main():
     """Run all seed functions."""
     db = SessionLocal()
     try:
-        logger.info("🌱 Starting database seeding...")
+        logger.info("Starting database seeding...")
         seed_admin_user(db)
         crops = seed_crops(db)
         seed_sample_prices(db, crops)
-        logger.info("✅ Database seeding complete!")
+        logger.info("Database seeding complete!")
     except Exception as e:
         db.rollback()
         logger.error(f"Seeding failed: {e}")

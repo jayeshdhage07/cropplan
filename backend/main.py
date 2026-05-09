@@ -14,6 +14,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import settings
 from app.core.exceptions import register_exception_handlers
+from app.middleware.security import RequestLoggingMiddleware, RateLimitMiddleware
 from app.core.logging import logger
 from app.api.auth import router as auth_router
 from app.api.crops import router as crops_router
@@ -52,11 +53,17 @@ def create_app() -> FastAPI:
     # Register exception handlers
     register_exception_handlers(app)
 
+    # Security and Logging Middleware
+    app.add_middleware(RateLimitMiddleware)
+    app.add_middleware(RequestLoggingMiddleware)
+
     # Register API routers
     app.include_router(auth_router)
-    app.include_router(crops_router)
-    app.include_router(mandi_router)
-    app.include_router(predictions_router)
+    
+    # We apply the API_V1_STR prefix to other routers if they don't have it
+    app.include_router(crops_router, prefix=settings.API_V1_STR)
+    app.include_router(mandi_router, prefix=settings.API_V1_STR)
+    app.include_router(predictions_router, prefix=settings.API_V1_STR)
 
     # Health check endpoint
     @app.get("/health", tags=["Health"])

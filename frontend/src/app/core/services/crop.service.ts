@@ -25,14 +25,14 @@ export class CropService {
   constructor(private api: ApiService) {}
 
   getAll(skip = 0, limit = 50): Observable<CropListResponse> {
-    return this.api.get<CropListResponse>('/api/crops', { skip, limit });
+    return this.api.get<CropListResponse>('/crops', { skip, limit });
   }
 
   getById(id: string): Observable<Crop> {
-    return this.api.get<Crop>(`/api/crops/${id}`);
+    return this.api.get<Crop>(`/crops/${id}`);
   }
 
   create(data: Partial<Crop>): Observable<Crop> {
-    return this.api.post<Crop>('/api/crops', data);
+    return this.api.post<Crop>('/crops', data);
   }
 }

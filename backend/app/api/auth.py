@@ -7,12 +7,12 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from app.database.session import get_db
-from app.schemas.auth import UserRegister, UserLogin, TokenResponse, UserResponse
+from app.schemas.auth import UserRegister, UserLogin, TokenResponse, UserResponse, RefreshTokenRequest
 from app.services.auth_service import AuthService
 from app.core.security import get_current_user
 from app.models.user import User
 
-router = APIRouter(prefix="/api/auth", tags=["Authentication"])
+router = APIRouter(prefix="/api/v1/auth", tags=["Authentication"])
 
 
 @router.post("/register", response_model=UserResponse, status_code=201)
@@ -38,6 +38,21 @@ def login(login_data: UserLogin, db: Session = Depends(get_db)):
     """
     return AuthService.login(db, login_data)
 
+
+@router.post("/refresh", response_model=TokenResponse)
+def refresh_token(request: RefreshTokenRequest, db: Session = Depends(get_db)):
+    """
+    Get a new access token using a valid refresh token.
+    """
+    return AuthService.refresh_token(db, request.refresh_token)
+
+@router.post("/logout")
+def logout():
+    """
+    Logout user. In stateless JWT, actual logout is handled client-side
+    by removing tokens, but this endpoint provides a logical hook.
+    """
+    return {"message": "Successfully logged out"}
 
 @router.get("/me", response_model=UserResponse)
 def get_profile(
