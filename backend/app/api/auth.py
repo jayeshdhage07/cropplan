@@ -11,6 +11,7 @@ from app.schemas.auth import UserRegister, UserLogin, TokenResponse, UserRespons
 from app.services.auth_service import AuthService
 from app.core.security import get_current_user
 from app.models.user import User
+from fastapi.security import OAuth2PasswordRequestForm
 
 router = APIRouter(prefix="/api/v1/auth", tags=["Authentication"])
 
@@ -33,9 +34,18 @@ def register(user_data: UserRegister, db: Session = Depends(get_db)):
 @router.post("/login", response_model=TokenResponse)
 def login(login_data: UserLogin, db: Session = Depends(get_db)):
     """
-    Login with mobile number and password.
+    Login with mobile number and password (JSON Payload - Used by Angular Frontend).
     Returns a JWT access token.
     """
+    return AuthService.login(db, login_data)
+
+@router.post("/swagger-login", response_model=TokenResponse, include_in_schema=False)
+def swagger_login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
+    """
+    Login endpoint specifically for Swagger UI Authorization button.
+    Maps Swagger's 'username' field to our 'mobile' field.
+    """
+    login_data = UserLogin(mobile=form_data.username, password=form_data.password)
     return AuthService.login(db, login_data)
 
 

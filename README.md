@@ -49,27 +49,37 @@ docker exec crop_predict_backend alembic upgrade head
 docker exec crop_predict_backend python scripts/seed_data.py
 ```
 
-### Option 2: Manual Setup
+### Option 2: Manual Local Setup (Enterprise Version)
 
-#### Backend
+#### 1. Database (PostgreSQL)
+Ensure you have PostgreSQL installed locally.
+1. Open pgAdmin 4 or your terminal and create a database named `crop_predict_db`.
+2. Update `backend/.env` so that your `DATABASE_URL` matches your local postgres credentials (e.g., `postgresql+pg8000://postgres:YOUR_PASSWORD@localhost:5432/crop_predict_db`).
+
+#### 2. Backend API
+Open a terminal in the `backend` folder:
 ```bash
 cd backend
-python -m venv venv
-venv\Scripts\activate          # Windows
 pip install -r requirements.txt
-cp .env.example .env
-alembic revision --autogenerate -m "initial_tables"
-alembic upgrade head
-python scripts/seed_data.py
-uvicorn main:app --reload --port 8000
-```
 
-#### Frontend
+# Apply enterprise database migrations (Creates Audit Fields)
+alembic upgrade head
+
+# Start the FastAPI Server
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
+```
+*API documentation is available at [http://localhost:8000/docs](http://localhost:8000/docs).*
+
+#### 3. Frontend UI
+Open a terminal in the `frontend` folder:
 ```bash
 cd frontend
 npm install
+
+# Start the Angular Server
 npm start
 ```
+*The web platform will be available at [http://localhost:4200](http://localhost:4200).*
 
 ## 🌐 Access Points
 
