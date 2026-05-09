@@ -20,7 +20,7 @@ class Settings(BaseSettings):
     APP_VERSION: str = "1.0.0"
 
     # Database
-    DATABASE_URL: str = "postgresql://crop_user:crop_password@localhost:5432/crop_predict_db"
+    DATABASE_URL: str = "postgresql+psycopg://crop_user:crop_password@localhost:5432/crop_predict_db"
 
     # JWT Authentication
     JWT_SECRET_KEY: str = "dev-secret-key-change-in-production"

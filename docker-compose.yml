@@ -30,7 +30,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      DATABASE_URL: postgresql://crop_user:crop_password@db:5432/crop_predict_db
+      DATABASE_URL: postgresql+psycopg://crop_user:crop_password@db:5432/crop_predict_db
       JWT_SECRET_KEY: docker-secret-key-change-in-production
       APP_ENV: development
       CORS_ORIGINS: http://localhost:4200,http://localhost:80

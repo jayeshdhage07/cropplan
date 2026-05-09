@@ -40,7 +40,14 @@ import { PredictionService, PredictionResult, CropRecommendation } from '../core
               </mat-select>
             </mat-form-field>
             <button mat-raised-button color="primary" (click)="getPrediction()" [disabled]="loading()" class="predict-btn">
-              @if (loading()) { <mat-spinner diameter="20"></mat-spinner> } @else { <mat-icon>insights</mat-icon> Get Prediction }
+              @if (loading()) {
+                <mat-spinner diameter="20"></mat-spinner>
+              } @else {
+                <ng-container>
+                  <mat-icon>insights</mat-icon>
+                  Get Prediction
+                </ng-container>
+              }
             </button>
           </div>
         </mat-card-content>
