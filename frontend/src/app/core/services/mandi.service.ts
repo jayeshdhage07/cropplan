@@ -43,7 +43,7 @@ export class MandiService {
     page?: number;
     page_size?: number;
   }): Observable<MandiPriceListResponse> {
-    return this.api.get<MandiPriceListResponse>('/api/mandi/prices', params as Record<string, string | number>);
+    return this.api.get<MandiPriceListResponse>('/mandi/prices', params as Record<string, string | number>);
   }
 
   getTrends(crop: string, district?: string, years = 3): Observable<MandiTrend[]> {

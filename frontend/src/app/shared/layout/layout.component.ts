@@ -31,9 +31,9 @@ import { AuthService } from '../../core/services/auth.service';
     MatDividerModule,
   ],
   template: `
-    @if (authService.isAuthenticated()) {
-      <mat-sidenav-container class="layout-container">
-        <!-- Sidebar Navigation -->
+    <mat-sidenav-container class="layout-container">
+      <!-- Sidebar Navigation (Only for authenticated users) -->
+      @if (authService.isAuthenticated()) {
         <mat-sidenav
           #sidenav
           [mode]="isMobile ? 'over' : 'side'"
@@ -69,10 +69,12 @@ import { AuthService } from '../../core/services/auth.service';
             </a>
           </mat-nav-list>
         </mat-sidenav>
+      }
 
-        <!-- Main Content -->
-        <mat-sidenav-content class="content-area">
-          <!-- Top Toolbar -->
+      <!-- Main Content -->
+      <mat-sidenav-content class="content-area">
+        <!-- Top Toolbar (Only for authenticated users) -->
+        @if (authService.isAuthenticated()) {
           <mat-toolbar class="top-toolbar">
             <button mat-icon-button (click)="sidenav.toggle()" class="menu-btn">
               <mat-icon>menu</mat-icon>
@@ -104,17 +106,14 @@ import { AuthService } from '../../core/services/auth.service';
               </button>
             </mat-menu>
           </mat-toolbar>
+        }
 
-          <!-- Page Content -->
-          <main class="page-content">
-            <ng-content></ng-content>
-          </main>
-        </mat-sidenav-content>
-      </mat-sidenav-container>
-    } @else {
-      <!-- Unauthenticated: show content without layout -->
-      <ng-content></ng-content>
-    }
+        <!-- Page Content -->
+        <main [class.page-content]="authService.isAuthenticated()">
+          <ng-content></ng-content>
+        </main>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
   `,
   styles: [`
     .layout-container {
