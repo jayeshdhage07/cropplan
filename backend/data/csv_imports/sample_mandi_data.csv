@@ -1,0 +1,16 @@
+commodity,state,district,market,arrival_date,min_price,max_price,modal_price
+Onion,Maharashtra,Nashik,Lasalgaon Mandi,2024-01-15,1200,2200,1800
+Onion,Maharashtra,Nashik,Lasalgaon Mandi,2024-02-10,1400,2500,1900
+Onion,Maharashtra,Nashik,Pimpalgaon Mandi,2024-03-05,1600,2800,2100
+Onion,Maharashtra,Pune,Market Yard Pune,2024-01-20,1100,2100,1700
+Onion,Maharashtra,Pune,Market Yard Pune,2024-02-15,1300,2400,1850
+Onion,Maharashtra,Nagpur,Kalamna Market,2024-01-25,1000,2000,1600
+Tomato,Maharashtra,Nashik,Lasalgaon Mandi,2024-01-15,800,1800,1200
+Tomato,Maharashtra,Nashik,Lasalgaon Mandi,2024-02-10,900,2000,1400
+Tomato,Maharashtra,Pune,Market Yard Pune,2024-01-20,700,1600,1100
+Tomato,Maharashtra,Pune,Market Yard Pune,2024-02-15,850,1900,1350
+Tomato,Maharashtra,Nagpur,Kalamna Market,2024-03-10,1000,2200,1500
+Wheat,Maharashtra,Nashik,Lasalgaon Mandi,2024-01-15,1900,2400,2200
+Wheat,Maharashtra,Pune,Market Yard Pune,2024-02-10,2000,2500,2300
+Wheat,Maharashtra,Nagpur,Cotton Market Nagpur,2024-01-25,1850,2350,2150
+Wheat,Maharashtra,Aurangabad,Aurangabad Mandi,2024-03-01,2100,2600,2400
