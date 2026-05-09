@@ -20,7 +20,7 @@ class Settings(BaseSettings):
     APP_VERSION: str = "1.0.0"
 
     # Database
-    DATABASE_URL: str = "postgresql+pg8000://crop_user:crop_password@localhost:5432/crop_predict_db"
+    DATABASE_URL: str = "postgresql+pg8000://postgres:postgres@localhost:5432/crop_predict_db"
 
     # API Configuration
     API_V1_STR: str = "/api/v1"
