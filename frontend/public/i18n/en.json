@@ -94,7 +94,14 @@
     "LOADING": "Loading dashboard data...",
     "VIEW_DETAILS": "View Details",
     "SEASON": "Season",
-    "DAYS": "days"
+    "DAYS": "days",
+    "ALERT_WARNING_TITLE": "Farming Alert: Secure Harvest!",
+    "ALERT_WARNING_DESC": "High chance of heavy rain forecast in your district. Avoid keeping harvested crops in open fields.",
+    "QUICK_ACTIONS": "Quick Actions",
+    "ACTION_PREDICT_SUB": "Check Crop Price",
+    "ACTION_PROFIT_SUB": "Calculate Gains",
+    "ACTION_TRENDS_SUB": "Mandi Price Rates",
+    "ACTION_PROFILE_SUB": "Manage Account"
   },
   "CROPS": {
     "TITLE": "Crop Trends",

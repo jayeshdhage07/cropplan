@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { LayoutComponent } from './shared/layout/layout.component';
+import { LanguageService } from './core/services/language.service';
 
 @Component({
   selector: 'app-root',
@@ -10,4 +11,8 @@ import { LayoutComponent } from './shared/layout/layout.component';
 })
 export class AppComponent {
   title = 'Crop Predict';
+
+  constructor(private langService: LanguageService) {
+    // Eagerly instantiates the LanguageService to initialize ngx-translate configurations on bootstrap
+  }
 }

@@ -4,7 +4,7 @@
  * Persists to localStorage before login, syncs to backend API after login.
  */
 
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal, computed, Injector } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ApiService } from './api.service';
 
@@ -31,7 +31,7 @@ export class LanguageService {
 
   constructor(
     private translate: TranslateService,
-    private api: ApiService
+    private injector: Injector
   ) {
     // Configure ngx-translate
     this.translate.addLangs(['en', 'hi', 'mr']);
@@ -58,7 +58,8 @@ export class LanguageService {
    */
   switchLanguageAndPersist(langCode: string): void {
     this.switchLanguage(langCode);
-    this.api.patch<any>('/auth/language', { preferred_language: langCode }).subscribe({
+    const api = this.injector.get(ApiService);
+    api.patch<any>('/auth/language', { preferred_language: langCode }).subscribe({
       error: () => {
         // Language still switched locally even if API fails
         console.warn('Failed to persist language preference to server');
