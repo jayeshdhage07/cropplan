@@ -7,15 +7,15 @@ services:
     container_name: crop_predict_db
     restart: unless-stopped
     environment:
-      POSTGRES_USER: crop_user
-      POSTGRES_PASSWORD: crop_password
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
       POSTGRES_DB: crop_predict_db
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U crop_user -d crop_predict_db"]
+      test: [ "CMD-SHELL", "pg_isready -U crop_user -d crop_predict_db" ]
       interval: 10s
       timeout: 5s
       retries: 5

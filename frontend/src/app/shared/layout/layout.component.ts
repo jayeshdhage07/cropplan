@@ -418,7 +418,7 @@ export interface NavItem {
       }
 
       .profile-meta {
-        color: var(--color-text-light);
+        color: rgba(255, 255, 255, 0.6);
         font-size: 0.75rem;
         display: flex;
         align-items: center;
@@ -459,10 +459,9 @@ export interface NavItem {
       text-transform: uppercase;
       font-weight: 800;
       letter-spacing: 0.08em;
-      color: var(--color-text-light);
+      color: rgba(255, 255, 255, 0.5);
       padding: 0 var(--space-6);
       margin-bottom: 2px;
-      opacity: 0.6;
     }
 
     .nav-list {
@@ -482,17 +481,23 @@ export interface NavItem {
         position: relative;
         transition: all var(--transition-normal);
         
+        /* Fix Angular Material 15+ MDC styling overriding local colors */
+        ::ng-deep .mdc-list-item__primary-text {
+          color: inherit !important;
+          font-weight: inherit !important;
+        }
+        
         &:hover {
           color: #ffffff !important;
           background: rgba(255, 255, 255, 0.04) !important;
           
           mat-icon {
-            color: var(--color-primary-light);
+            color: #ffffff !important;
           }
         }
         
         mat-icon {
-          color: var(--color-text-light);
+          color: rgba(255, 255, 255, 0.5) !important;
           transition: color var(--transition-fast);
           margin-right: var(--space-4) !important;
           font-size: 22px;
