@@ -38,7 +38,18 @@ cropplan/
 
 ## 🚀 Quick Start
 
-### Option 1: Docker (Recommended)
+### Development Environment (New Node Runner Orchestrator)
+
+The easiest way to run the full stack locally is to use the included Node orchestrator script which automatically handles port conflict resolution and boots both the FastAPI backend and Angular frontend concurrently.
+
+```bash
+# From the root directory (cropplan/)
+npm install
+node runner.js
+```
+*Note: The frontend port may dynamically change if 4200 is occupied, check the terminal output for the active local URL.*
+
+### Option 1: Docker (Production)
 
 ```bash
 docker-compose up --build
@@ -100,7 +111,7 @@ npm start
 
 | Layer | Technology |
 |-------|-----------|
-| Frontend | Angular 19, Angular Material, Chart.js, RxJS |
+| Frontend | Angular 19 (Standalone), Angular Material, Chart.js, ngx-translate (i18n) |
 | Backend | Python, FastAPI, SQLAlchemy 2.0, Pydantic v2 |
 | Database | PostgreSQL 16 |
 | Auth | JWT (python-jose + passlib) |
@@ -111,15 +122,16 @@ npm start
 ## 📊 MVP Scope
 
 - **Region**: Maharashtra only
-- **Crops**: Onion, Tomato, Wheat
+- **Crops**: Onion, Tomato, Wheat, Rice, Sugarcane, Cotton, Soyabean, Maize, Gram
 - **Features**:
+  - ✅ Enterprise-grade Internationalization (i18n) supporting English, Hindi, and Marathi.
+  - ✅ Premium Glassmorphic UI/UX tailored for agricultural accessibility.
   - ✅ User authentication (Farmer + Admin roles)
-  - ✅ Historical mandi price visualization
-  - ✅ Monthly/yearly trend charts
-  - ✅ District-wise filtering
-  - ✅ Rule-based price predictions
-  - ✅ Crop recommendations
-  - ✅ Profit calculator
+  - ✅ Live Mandi rates with minimum, maximum, and modal price tables.
+  - ✅ Historical mandi price visualization & trend charts
+  - ✅ District-wise filtering and agricultural advisories
+  - ✅ Rule-based price predictions & crop recommendations
+  - ✅ Profit calculator tailored for seed, fertilizer, and irrigation costs.
   - ✅ CSV data import pipeline
 
 ## 🗺️ Roadmap
