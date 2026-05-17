@@ -1,13 +1,13 @@
 """
 Authentication API routes.
-Handles user registration, login, and profile retrieval.
+Handles user registration, login, profile retrieval, and language preferences.
 """
 
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from app.database.session import get_db
-from app.schemas.auth import UserRegister, UserLogin, TokenResponse, UserResponse, RefreshTokenRequest
+from app.schemas.auth import UserRegister, UserLogin, TokenResponse, UserResponse, RefreshTokenRequest, LanguageUpdateRequest
 from app.services.auth_service import AuthService
 from app.core.security import get_current_user
 from app.models.user import User
@@ -22,10 +22,15 @@ def register(user_data: UserRegister, db: Session = Depends(get_db)):
     Register a new user account.
     
     - **name**: Full name of the user
-    - **mobile**: Mobile number (unique)
-    - **password**: Password (min 6 characters)
+    - **mobile**: Mobile number (unique, 10-digit Indian format)
+    - **password**: Password (min 8 chars, 1 uppercase, 1 digit)
+    - **confirm_password**: Must match password
     - **district**: User's district (optional)
     - **state**: User's state (default: Maharashtra)
+    - **village**: User's village (optional)
+    - **preferred_language**: Language preference - en/hi/mr (default: en)
+    - **primary_crops**: Comma-separated crop names (optional)
+    - **land_size_acres**: Land size in acres (optional)
     """
     user = AuthService.register(db, user_data)
     return user
@@ -35,7 +40,7 @@ def register(user_data: UserRegister, db: Session = Depends(get_db)):
 def login(login_data: UserLogin, db: Session = Depends(get_db)):
     """
     Login with mobile number and password (JSON Payload - Used by Angular Frontend).
-    Returns a JWT access token.
+    Returns a JWT access token and user's preferred language.
     """
     return AuthService.login(db, login_data)
 
@@ -80,4 +85,45 @@ def get_profile(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="User not found",
         )
+    return user
+
+
+@router.patch("/language")
+def update_language(
+    request: LanguageUpdateRequest,
+    current_user: dict = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """
+    Update the preferred language for the authenticated user.
+    Supported languages: en (English), hi (Hindi), mr (Marathi).
+    """
+    return AuthService.update_language(db, current_user["user_id"], request.preferred_language)
+
+
+@router.put("/profile", response_model=UserResponse)
+def update_profile(
+    profile_data: dict,
+    current_user: dict = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """
+    Update farmer profile fields (name, district, state, village, primary_crops, land_size_acres).
+    """
+    user = db.query(User).filter(User.id == current_user["user_id"]).first()
+    if not user:
+        from fastapi import HTTPException, status
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User not found",
+        )
+
+    # Only allow updating specific fields
+    updatable_fields = {"name", "district", "state", "village", "primary_crops", "land_size_acres", "email"}
+    for key, value in profile_data.items():
+        if key in updatable_fields and hasattr(user, key):
+            setattr(user, key, value)
+
+    db.commit()
+    db.refresh(user)
     return user

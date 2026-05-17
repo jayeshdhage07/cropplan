@@ -6,7 +6,7 @@ Supports farmer and admin roles as defined in the blueprint.
 import uuid
 from datetime import datetime, timezone
 
-from sqlalchemy import Column, String, DateTime, Text
+from sqlalchemy import Column, String, DateTime, Text, Numeric
 from sqlalchemy.dialects.postgresql import UUID
 
 from app.database.base import Base
@@ -26,6 +26,13 @@ class User(Base):
     state = Column(String(100), nullable=True, default="Maharashtra")
     role = Column(String(20), nullable=False, default="farmer")  # farmer | admin
     is_active = Column(String(1), nullable=False, default="1")
+
+    # New farmer-specific fields
+    village = Column(String(200), nullable=True)
+    preferred_language = Column(String(5), nullable=False, default="en")  # en | hi | mr
+    primary_crops = Column(Text, nullable=True)  # Comma-separated crop names
+    land_size_acres = Column(Numeric(8, 2), nullable=True)
+
     created_at = Column(
         DateTime(timezone=True),
         nullable=False,

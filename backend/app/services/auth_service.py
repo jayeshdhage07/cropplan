@@ -48,7 +48,7 @@ class AuthService:
                     detail="Email already registered",
                 )
 
-        # Create user
+        # Create user with enhanced farmer fields
         new_user = User(
             name=user_data.name,
             mobile=user_data.mobile,
@@ -56,6 +56,10 @@ class AuthService:
             password_hash=hash_password(user_data.password),
             district=user_data.district,
             state=user_data.state or "Maharashtra",
+            village=user_data.village,
+            preferred_language=user_data.preferred_language or "en",
+            primary_crops=user_data.primary_crops,
+            land_size_acres=user_data.land_size_acres,
             role="farmer",
         )
 
@@ -76,7 +80,7 @@ class AuthService:
             login_data: Login credentials.
         
         Returns:
-            TokenResponse with JWT access token.
+            TokenResponse with JWT access token and preferred language.
         
         Raises:
             HTTPException: If credentials are invalid.
@@ -102,6 +106,7 @@ class AuthService:
             user_id=str(user.id),
             name=user.name,
             role=user.role,
+            preferred_language=user.preferred_language or "en",
         )
 
     @staticmethod
@@ -130,4 +135,31 @@ class AuthService:
             user_id=str(user.id),
             name=user.name,
             role=user.role,
+            preferred_language=user.preferred_language or "en",
         )
+
+    @staticmethod
+    def update_language(db: Session, user_id: str, language: str) -> dict:
+        """
+        Update user's preferred language.
+        
+        Args:
+            db: Database session.
+            user_id: UUID of the user.
+            language: Language code (en/hi/mr).
+        
+        Returns:
+            Success message with updated language.
+        """
+        user = db.query(User).filter(User.id == user_id).first()
+        if not user:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="User not found",
+            )
+        
+        user.preferred_language = language
+        db.commit()
+        
+        logger.info(f"Language updated for user {user.mobile}: {language}")
+        return {"message": "Language preference updated", "preferred_language": language}

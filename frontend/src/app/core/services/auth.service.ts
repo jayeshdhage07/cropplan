@@ -1,11 +1,13 @@
 /**
  * Authentication Service - Handles login, register, token management.
+ * Integrates with LanguageService for auto-loading user language preference.
  */
 
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal, computed, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { ApiService } from './api.service';
+import { LanguageService } from './language.service';
 
 export interface LoginRequest {
   mobile: string;
@@ -16,9 +18,14 @@ export interface RegisterRequest {
   name: string;
   mobile: string;
   password: string;
+  confirm_password: string;
   email?: string;
   district?: string;
   state?: string;
+  village?: string;
+  preferred_language?: string;
+  primary_crops?: string;
+  land_size_acres?: number;
 }
 
 export interface TokenResponse {
@@ -28,6 +35,7 @@ export interface TokenResponse {
   user_id: string;
   name: string;
   role: string;
+  preferred_language: string;
 }
 
 export interface UserProfile {
@@ -37,7 +45,11 @@ export interface UserProfile {
   email?: string;
   district?: string;
   state?: string;
+  village?: string;
   role: string;
+  preferred_language?: string;
+  primary_crops?: string;
+  land_size_acres?: number;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -45,6 +57,8 @@ export class AuthService {
   private readonly TOKEN_KEY = 'crop_predict_access_token';
   private readonly REFRESH_TOKEN_KEY = 'crop_predict_refresh_token';
   private readonly USER_KEY = 'crop_predict_user';
+
+  private languageService = inject(LanguageService);
 
   /** Reactive signal for current user */
   private _currentUser = signal<UserProfile | null>(this.loadStoredUser());
@@ -68,9 +82,15 @@ export class AuthService {
           name: response.name,
           mobile: credentials.mobile,
           role: response.role,
+          preferred_language: response.preferred_language,
         };
         this.storeUser(user);
         this._currentUser.set(user);
+
+        // Auto-load user's preferred language on login
+        if (response.preferred_language) {
+          this.languageService.loadUserLanguage(response.preferred_language);
+        }
       })
     );
   }
@@ -116,6 +136,19 @@ export class AuthService {
 
   getProfile(): Observable<UserProfile> {
     return this.api.get<UserProfile>('/auth/me').pipe(
+      tap((user) => {
+        this.storeUser(user);
+        this._currentUser.set(user);
+        // Sync language on profile refresh
+        if (user.preferred_language) {
+          this.languageService.loadUserLanguage(user.preferred_language);
+        }
+      })
+    );
+  }
+
+  updateProfile(data: Partial<UserProfile>): Observable<UserProfile> {
+    return this.api.put<UserProfile>('/auth/profile', data).pipe(
       tap((user) => {
         this.storeUser(user);
         this._currentUser.set(user);

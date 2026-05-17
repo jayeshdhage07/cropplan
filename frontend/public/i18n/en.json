@@ -1,0 +1,180 @@
+{
+  "APP": {
+    "NAME": "CropPredict",
+    "TAGLINE": "Smart decisions for smarter farming"
+  },
+  "LANGUAGE": {
+    "LABEL": "Language",
+    "ENGLISH": "English",
+    "HINDI": "हिंदी",
+    "MARATHI": "मराठी",
+    "SELECT": "Select Language"
+  },
+  "AUTH": {
+    "LOGIN": {
+      "TITLE": "Welcome Back",
+      "SUBTITLE": "Login to your account",
+      "MOBILE": "Mobile Number",
+      "MOBILE_PLACEHOLDER": "Enter mobile number",
+      "PASSWORD": "Password",
+      "PASSWORD_PLACEHOLDER": "Enter password",
+      "SUBMIT": "Login",
+      "NO_ACCOUNT": "Don't have an account?",
+      "REGISTER_LINK": "Register here",
+      "SUCCESS": "Login successful!",
+      "FAILED": "Login failed. Please check your credentials."
+    },
+    "REGISTER": {
+      "TITLE": "Create Account",
+      "SUBTITLE": "Register to get started",
+      "TAGLINE": "Join the smarter farming revolution",
+      "NAME": "Full Name",
+      "NAME_PLACEHOLDER": "Enter your full name",
+      "MOBILE": "Mobile Number",
+      "MOBILE_PLACEHOLDER": "10-digit mobile number",
+      "EMAIL": "Email (Optional)",
+      "EMAIL_PLACEHOLDER": "email@example.com",
+      "PASSWORD": "Password",
+      "PASSWORD_PLACEHOLDER": "Min 8 chars, 1 uppercase, 1 digit",
+      "CONFIRM_PASSWORD": "Confirm Password",
+      "CONFIRM_PASSWORD_PLACEHOLDER": "Re-enter password",
+      "STATE": "State",
+      "STATE_PLACEHOLDER": "Select your state",
+      "DISTRICT": "District",
+      "DISTRICT_PLACEHOLDER": "Select your district",
+      "VILLAGE": "Village",
+      "VILLAGE_PLACEHOLDER": "Enter your village name",
+      "PREFERRED_LANGUAGE": "Preferred Language",
+      "PRIMARY_CROPS": "Primary Crops",
+      "PRIMARY_CROPS_PLACEHOLDER": "e.g., Onion, Tomato, Wheat",
+      "LAND_SIZE": "Land Size (Acres)",
+      "LAND_SIZE_PLACEHOLDER": "Enter land size (optional)",
+      "SUBMIT": "Create Account",
+      "HAS_ACCOUNT": "Already have an account?",
+      "LOGIN_LINK": "Login here",
+      "SUCCESS": "Account created successfully! Please login.",
+      "FAILED": "Registration failed. Please try again."
+    },
+    "VALIDATION": {
+      "REQUIRED": "This field is required",
+      "MOBILE_INVALID": "Enter a valid 10-digit mobile number",
+      "PASSWORD_MIN": "Password must be at least 8 characters",
+      "PASSWORD_UPPERCASE": "Must contain at least one uppercase letter",
+      "PASSWORD_DIGIT": "Must contain at least one digit",
+      "PASSWORD_MISMATCH": "Passwords do not match",
+      "NAME_MIN": "Name must be at least 2 characters",
+      "EMAIL_INVALID": "Enter a valid email address"
+    },
+    "LOGOUT": "Logout"
+  },
+  "NAV": {
+    "DASHBOARD": "Dashboard",
+    "CROP_TRENDS": "Crop Trends",
+    "PREDICTIONS": "Predictions",
+    "PROFIT_ESTIMATOR": "Profit Estimator",
+    "PROFILE": "Profile",
+    "SETTINGS": "Settings",
+    "LOGOUT": "Logout"
+  },
+  "TOOLBAR": {
+    "WELCOME": "Welcome",
+    "ROLE": "Role"
+  },
+  "DASHBOARD": {
+    "TITLE": "Dashboard",
+    "WELCOME_MESSAGE": "Welcome back, {{name}}. Here's your farming overview.",
+    "TRACKED_CROPS": "Tracked Crops",
+    "ACTIVE_MANDIS": "Active Mandis",
+    "YEARS_DATA": "Years of Data",
+    "PREDICTIONS_STATUS": "Predictions",
+    "LIVE": "Live",
+    "TREND_TITLE": "Price Trends - Onion (Maharashtra)",
+    "TREND_SUBTITLE": "Monthly average modal prices",
+    "NO_TREND_DATA": "No trend data available yet. Import mandi data to see charts.",
+    "LOADING": "Loading dashboard data...",
+    "VIEW_DETAILS": "View Details",
+    "SEASON": "Season",
+    "DAYS": "days"
+  },
+  "CROPS": {
+    "TITLE": "Crop Trends",
+    "SUBTITLE": "View historical trends and market data for tracked crops",
+    "SEASON": "Season",
+    "GROWTH_PERIOD": "{{days}} days growth period",
+    "VIEW_TRENDS": "View Trends",
+    "DEFAULT_DESC": "Click to view detailed market trends and price history.",
+    "DETAIL": {
+      "BACK": "Back",
+      "PRICE_TREND": "Price Trend",
+      "ALL_DISTRICTS": "All",
+      "DISTRICT_LABEL": "District",
+      "NO_DATA": "No data available",
+      "MODAL_PRICE": "Modal Price (₹)"
+    }
+  },
+  "PREDICTIONS": {
+    "TITLE": "Predictions & Recommendations",
+    "SUBTITLE": "Get AI-powered crop price predictions and personalized recommendations",
+    "PRICE_PREDICTION": "Price Prediction",
+    "CROP_LABEL": "Crop",
+    "DISTRICT_LABEL": "District",
+    "GET_PREDICTION": "Get Prediction",
+    "PREDICTED_PRICE": "Predicted Price / Quintal",
+    "PRICE_TREND": "Price Trend",
+    "CONFIDENCE": "Confidence Score",
+    "RECOMMENDATIONS_TITLE": "Crop Recommendations",
+    "GET_RECOMMENDATIONS": "Get Recommendations",
+    "CONFIDENCE_LABEL": "confidence",
+    "PER_QUINTAL": "/quintal"
+  },
+  "PROFIT": {
+    "TITLE": "Profit Estimator",
+    "SUBTITLE": "Calculate your estimated profit based on costs and market predictions",
+    "CROP_LABEL": "Crop",
+    "DISTRICT_LABEL": "District",
+    "SEED_COST": "Seed Cost (₹)",
+    "FERTILIZER_COST": "Fertilizer Cost (₹)",
+    "LABOUR_COST": "Labour Cost (₹)",
+    "IRRIGATION_COST": "Irrigation Cost (₹)",
+    "LAND_SIZE": "Land Size (Acres)",
+    "CALCULATE": "Calculate Profit",
+    "RESULT_TITLE": "Profit Analysis",
+    "TOTAL_COST": "Total Cost",
+    "EXPECTED_REVENUE": "Expected Revenue",
+    "ESTIMATED_PROFIT": "Estimated Profit",
+    "PROFIT_MARGIN": "Profit Margin",
+    "PRICE_PER_QUINTAL": "Predicted Price/Quintal"
+  },
+  "PROFILE": {
+    "TITLE": "Farmer Profile",
+    "SUBTITLE": "Manage your personal information",
+    "PERSONAL_INFO": "Personal Information",
+    "FARMING_INFO": "Farming Information",
+    "SAVE": "Save Changes",
+    "SAVED": "Profile updated successfully!",
+    "LANGUAGE_PREF": "Language Preference"
+  },
+  "SETTINGS": {
+    "TITLE": "Settings",
+    "SUBTITLE": "Manage your preferences",
+    "LANGUAGE_SECTION": "Language",
+    "LANGUAGE_DESC": "Choose your preferred language for the application",
+    "SAVED": "Settings saved successfully!"
+  },
+  "COMMON": {
+    "LOADING": "Loading...",
+    "ERROR": "An error occurred. Please try again.",
+    "SAVE": "Save",
+    "CANCEL": "Cancel",
+    "CLOSE": "Close",
+    "YES": "Yes",
+    "NO": "No",
+    "OK": "OK",
+    "BACK": "Back",
+    "NEXT": "Next",
+    "SEARCH": "Search",
+    "FILTER": "Filter",
+    "NO_DATA": "No data available",
+    "QUINTAL": "quintal"
+  }
+}

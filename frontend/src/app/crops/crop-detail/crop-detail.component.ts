@@ -8,6 +8,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 import { ChartComponent, ChartDataset } from '../../shared/components/chart/chart.component';
 import { CropService, Crop } from '../../core/services/crop.service';
 import { MandiService } from '../../core/services/mandi.service';
@@ -15,27 +16,27 @@ import { MandiService } from '../../core/services/mandi.service';
 @Component({
   selector: 'app-crop-detail',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, MatCardModule, MatIconModule, MatButtonModule, MatSelectModule, MatFormFieldModule, MatProgressSpinnerModule, ChartComponent],
+  imports: [CommonModule, RouterModule, FormsModule, MatCardModule, MatIconModule, MatButtonModule, MatSelectModule, MatFormFieldModule, MatProgressSpinnerModule, TranslateModule, ChartComponent],
   template: `
     <div class="page-container">
       @if (crop()) {
         <div class="page-header">
-          <button mat-button routerLink="/crops"><mat-icon>arrow_back</mat-icon> Back</button>
+          <button mat-button routerLink="/crops"><mat-icon>arrow_back</mat-icon> {{ 'CROPS.DETAIL.BACK' | translate }}</button>
           <h1>{{ crop()!.name }}</h1>
-          <p>{{ crop()!.description || 'Price trends and analysis' }}</p>
+          <p>{{ crop()!.description || ('CROPS.DETAIL.PRICE_TREND' | translate) }}</p>
         </div>
         <mat-form-field appearance="outline" style="width:250px;margin-bottom:24px">
-          <mat-label>District</mat-label>
+          <mat-label>{{ 'CROPS.DETAIL.DISTRICT_LABEL' | translate }}</mat-label>
           <mat-select [(ngModel)]="selectedDistrict" (selectionChange)="loadTrends()">
-            <mat-option value="">All</mat-option>
+            <mat-option value="">{{ 'CROPS.DETAIL.ALL_DISTRICTS' | translate }}</mat-option>
             @for (d of districts(); track d) { <mat-option [value]="d">{{ d }}</mat-option> }
           </mat-select>
         </mat-form-field>
         <mat-card style="padding:24px;margin-bottom:24px">
-          <mat-card-title>Price Trend</mat-card-title>
+          <mat-card-title>{{ 'CROPS.DETAIL.PRICE_TREND' | translate }}</mat-card-title>
           @if (chartLabels().length) {
             <app-chart type="line" [labels]="chartLabels()" [datasets]="chartDatasets()" height="400px"></app-chart>
-          } @else { <p style="text-align:center;padding:48px;color:gray">No data available</p> }
+          } @else { <p style="text-align:center;padding:48px;color:gray">{{ 'CROPS.DETAIL.NO_DATA' | translate }}</p> }
         </mat-card>
       } @else { <mat-spinner diameter="40" style="margin:auto"></mat-spinner> }
     </div>

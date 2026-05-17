@@ -9,51 +9,44 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDividerModule } from '@angular/material/divider';
+import { TranslateModule } from '@ngx-translate/core';
 import { PredictionService, PredictionResult, CropRecommendation } from '../core/services/prediction.service';
 
 @Component({
   selector: 'app-prediction',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatCardModule, MatFormFieldModule, MatSelectModule, MatInputModule, MatButtonModule, MatIconModule, MatProgressSpinnerModule, MatDividerModule],
+  imports: [CommonModule, FormsModule, MatCardModule, MatFormFieldModule, MatSelectModule, MatInputModule, MatButtonModule, MatIconModule, MatProgressSpinnerModule, MatDividerModule, TranslateModule],
   template: `
     <div class="page-container">
       <div class="page-header">
-        <h1>Predictions & Recommendations</h1>
-        <p>Get AI-powered crop price predictions and personalized recommendations</p>
+        <h1>{{ 'PREDICTIONS.TITLE' | translate }}</h1>
+        <p>{{ 'PREDICTIONS.SUBTITLE' | translate }}</p>
       </div>
 
-      <!-- Prediction Form -->
       <mat-card class="prediction-form-card">
-        <mat-card-header><mat-card-title>Price Prediction</mat-card-title></mat-card-header>
+        <mat-card-header><mat-card-title>{{ 'PREDICTIONS.PRICE_PREDICTION' | translate }}</mat-card-title></mat-card-header>
         <mat-card-content>
           <div class="form-row">
             <mat-form-field appearance="outline">
-              <mat-label>Crop</mat-label>
+              <mat-label>{{ 'PREDICTIONS.CROP_LABEL' | translate }}</mat-label>
               <mat-select [(ngModel)]="selectedCrop">
                 @for (c of cropOptions; track c) { <mat-option [value]="c">{{ c }}</mat-option> }
               </mat-select>
             </mat-form-field>
             <mat-form-field appearance="outline">
-              <mat-label>District</mat-label>
+              <mat-label>{{ 'PREDICTIONS.DISTRICT_LABEL' | translate }}</mat-label>
               <mat-select [(ngModel)]="selectedDistrict">
                 @for (d of districtOptions; track d) { <mat-option [value]="d">{{ d }}</mat-option> }
               </mat-select>
             </mat-form-field>
             <button mat-raised-button color="primary" (click)="getPrediction()" [disabled]="loading()" class="predict-btn">
-              @if (loading()) {
-                <mat-spinner diameter="20"></mat-spinner>
-              } @else {
-                <ng-container>
-                  <mat-icon>insights</mat-icon>
-                  Get Prediction
-                </ng-container>
-              }
+              @if (loading()) { <mat-spinner diameter="20"></mat-spinner> }
+              @else { <ng-container><mat-icon>insights</mat-icon> {{ 'PREDICTIONS.GET_PREDICTION' | translate }}</ng-container> }
             </button>
           </div>
         </mat-card-content>
       </mat-card>
 
-      <!-- Prediction Result -->
       @if (prediction()) {
         <mat-card class="result-card animate-fade-in-up">
           <mat-card-header>
@@ -63,18 +56,18 @@ import { PredictionService, PredictionResult, CropRecommendation } from '../core
             <div class="result-grid">
               <div class="result-item">
                 <div class="result-value">₹{{ prediction()!.predicted_price }}</div>
-                <div class="result-label">Predicted Price / Quintal</div>
+                <div class="result-label">{{ 'PREDICTIONS.PREDICTED_PRICE' | translate }}</div>
               </div>
               <div class="result-item">
                 <div class="result-value" [class]="'trend-' + prediction()!.trend.toLowerCase()">
                   <mat-icon>{{ prediction()!.trend === 'UP' ? 'trending_up' : prediction()!.trend === 'DOWN' ? 'trending_down' : 'trending_flat' }}</mat-icon>
                   {{ prediction()!.trend }}
                 </div>
-                <div class="result-label">Price Trend</div>
+                <div class="result-label">{{ 'PREDICTIONS.PRICE_TREND' | translate }}</div>
               </div>
               <div class="result-item">
                 <div class="result-value">{{ prediction()!.confidence }}%</div>
-                <div class="result-label">Confidence Score</div>
+                <div class="result-label">{{ 'PREDICTIONS.CONFIDENCE' | translate }}</div>
               </div>
             </div>
             @if (prediction()!.recommendation) {
@@ -85,18 +78,17 @@ import { PredictionService, PredictionResult, CropRecommendation } from '../core
         </mat-card>
       }
 
-      <!-- Recommendations Section -->
       <div style="margin-top:32px">
-        <h2 class="section-title">Crop Recommendations</h2>
+        <h2 class="section-title">{{ 'PREDICTIONS.RECOMMENDATIONS_TITLE' | translate }}</h2>
         <div class="form-row" style="margin-bottom:16px">
           <mat-form-field appearance="outline" style="width:250px">
-            <mat-label>District</mat-label>
+            <mat-label>{{ 'PREDICTIONS.DISTRICT_LABEL' | translate }}</mat-label>
             <mat-select [(ngModel)]="recDistrict">
               @for (d of districtOptions; track d) { <mat-option [value]="d">{{ d }}</mat-option> }
             </mat-select>
           </mat-form-field>
           <button mat-raised-button color="accent" (click)="getRecommendations()">
-            <mat-icon>recommend</mat-icon> Get Recommendations
+            <mat-icon>recommend</mat-icon> {{ 'PREDICTIONS.GET_RECOMMENDATIONS' | translate }}
           </button>
         </div>
         @if (recommendations().length) {
@@ -110,7 +102,7 @@ import { PredictionService, PredictionResult, CropRecommendation } from '../core
                     <span class="trend-badge" [class]="'trend-' + rec.trend.toLowerCase()">{{ rec.trend }}</span>
                   </div>
                 </div>
-                <p>₹{{ rec.predicted_price | number:'1.0-0' }}/quintal · {{ rec.confidence }}% confidence</p>
+                <p>₹{{ rec.predicted_price | number:'1.0-0' }}{{ 'PREDICTIONS.PER_QUINTAL' | translate }} · {{ rec.confidence }}% {{ 'PREDICTIONS.CONFIDENCE_LABEL' | translate }}</p>
                 <p class="rec-reason">{{ rec.reason }}</p>
               </mat-card>
             }

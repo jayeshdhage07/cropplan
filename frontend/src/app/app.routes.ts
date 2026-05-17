@@ -32,6 +32,26 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
+    path: 'profit-estimator',
+    loadComponent: () =>
+      import('./profit-estimator/profit-estimator.component').then(
+        (m) => m.ProfitEstimatorComponent
+      ),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'profile',
+    loadComponent: () =>
+      import('./profile/profile.component').then((m) => m.ProfileComponent),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'settings',
+    loadComponent: () =>
+      import('./settings/settings.component').then((m) => m.SettingsComponent),
+    canActivate: [authGuard],
+  },
+  {
     path: '**',
     redirectTo: 'dashboard',
   },
