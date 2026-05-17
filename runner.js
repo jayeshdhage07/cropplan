@@ -319,6 +319,12 @@ async function main() {
   console.log(`\n${colors.cyan}====================================`);
   console.log(`🚀 Starting Full-Stack Runner`);
   console.log(`====================================${colors.reset}\n`);
+  console.log(`\n${colors.cyan}====================================`);
+  console.log(`🚀 Author: Jayesh Dhage`);
+  console.log(`====================================${colors.reset}\n`);
+  console.log(`\n${colors.cyan}====================================`);
+  console.log(`🚀 Project Name: Agriculture Crop Prediction`);
+  console.log(`====================================${colors.reset}\n`);
 
   checkFolders();
   checkTools();

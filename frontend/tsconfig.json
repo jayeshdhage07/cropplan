@@ -18,7 +18,6 @@
     "module": "ES2022",
     "lib": ["ES2022", "dom"],
     "skipLibCheck": true,
-    "baseUrl": "./",
     "paths": {
       "@core/*": ["src/app/core/*"],
       "@shared/*": ["src/app/shared/*"],
@@ -27,7 +26,8 @@
       "@crops/*": ["src/app/crops/*"],
       "@prediction/*": ["src/app/prediction/*"],
       "@env/*": ["src/environments/*"]
-    }
+    },
+    "baseUrl": "./"
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
