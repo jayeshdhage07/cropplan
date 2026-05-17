@@ -105,7 +105,7 @@ export interface NavItem {
             <!-- Group 1: Core Farming Activities -->
             <div class="nav-group">
               @if (!isCollapsed() || isMobile()) {
-                <span class="nav-group-title">Core Farming</span>
+                <span class="nav-group-title">{{ 'NAV.CORE_FARMING' | translate }}</span>
               }
               <mat-nav-list class="nav-list">
                 @for (item of coreNavItems; track item.route) {
@@ -129,7 +129,7 @@ export interface NavItem {
             <!-- Group 2: Account & Settings -->
             <div class="nav-group">
               @if (!isCollapsed() || isMobile()) {
-                <span class="nav-group-title">Account & Settings</span>
+                <span class="nav-group-title">{{ 'NAV.ACCOUNT_SETTINGS' | translate }}</span>
               }
               <mat-nav-list class="nav-list">
                 @for (item of settingsNavItems; track item.route) {
@@ -208,29 +208,29 @@ export interface NavItem {
 
             <mat-menu #alertsMenu="matMenu" class="alerts-dropdown">
               <div class="alerts-header">
-                <h3>Farming Alerts & Tips</h3>
-                <span class="alerts-count">3 New Alerts</span>
+                <h3>{{ 'ALERTS.HEADER' | translate }}</h3>
+                <span class="alerts-count">{{ 'ALERTS.NEW_COUNT' | translate:{count:3} }}</span>
               </div>
               <mat-divider></mat-divider>
               <button mat-menu-item class="alert-item warning">
                 <mat-icon>wb_cloudy</mat-icon>
                 <div class="alert-info">
-                  <span class="alert-title">Heavy Rain Warning</span>
-                  <span class="alert-desc">Secure onion harvest in Nashik; rains expected within 12h.</span>
+                  <span class="alert-title">{{ 'ALERTS.WARNING_TITLE' | translate }}</span>
+                  <span class="alert-desc">{{ 'ALERTS.WARNING_DESC' | translate }}</span>
                 </div>
               </button>
               <button mat-menu-item class="alert-item success">
                 <mat-icon>trending_up</mat-icon>
                 <div class="alert-info">
-                  <span class="alert-title">Market Price Spike</span>
-                  <span class="alert-desc">Wheat modal prices spiked by ₹120/quintal in Solapur.</span>
+                  <span class="alert-title">{{ 'ALERTS.SPIKE_TITLE' | translate }}</span>
+                  <span class="alert-desc">{{ 'ALERTS.SPIKE_DESC' | translate }}</span>
                 </div>
               </button>
               <button mat-menu-item class="alert-item info">
                 <mat-icon>tips_and_updates</mat-icon>
                 <div class="alert-info">
-                  <span class="alert-title">Farming Advisory</span>
-                  <span class="alert-desc">Ideal time to sow Rabi crops. Check profit insights.</span>
+                  <span class="alert-title">{{ 'ALERTS.INFO_TITLE' | translate }}</span>
+                  <span class="alert-desc">{{ 'ALERTS.INFO_DESC' | translate }}</span>
                 </div>
               </button>
             </mat-menu>

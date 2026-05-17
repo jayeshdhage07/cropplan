@@ -74,7 +74,9 @@
     "PROFIT_ESTIMATOR": "Profit Estimator",
     "PROFILE": "Profile",
     "SETTINGS": "Settings",
-    "LOGOUT": "Logout"
+    "LOGOUT": "Logout",
+    "CORE_FARMING": "Core Farming",
+    "ACCOUNT_SETTINGS": "Account & Settings"
   },
   "TOOLBAR": {
     "WELCOME": "Welcome",
@@ -101,7 +103,22 @@
     "ACTION_PREDICT_SUB": "Check Crop Price",
     "ACTION_PROFIT_SUB": "Calculate Gains",
     "ACTION_TRENDS_SUB": "Mandi Price Rates",
-    "ACTION_PROFILE_SUB": "Manage Account"
+    "ACTION_PROFILE_SUB": "Manage Account",
+    "WEATHER_COND": "Sunny & Warm",
+    "WEATHER_DESC": "Perfect humidity for sowing seeds",
+    "METRIC_HUMIDITY": "Humidity",
+    "METRIC_WIND": "Wind",
+    "METRIC_RAIN_PROB": "Rain Prob.",
+    "ADVISORY_TITLE": "Weekly Farming Advisory",
+    "ADVISORY_SUBTITLE": "Expert recommendations for {{district}} region",
+    "ADV_ROTATION_TITLE": "Crop Rotation:",
+    "ADV_ROTATION_DESC": "Consider sowing pulses or legumes after rice harvest to restore nitrogen levels naturally and cut fertilizer costs by 20%.",
+    "ADV_DRIP_TITLE": "Drip Irrigation:",
+    "ADV_DRIP_DESC": "For onion crops in Pune, utilize drip systems between 6 AM and 9 AM to reduce water wastage and boost yield size.",
+    "ADV_PEST_TITLE": "Organic Pest Control:",
+    "ADV_PEST_DESC": "Spray neem-oil mix (10ml per litre of water) to protect young tomato leaves from thrips and whiteflies safely.",
+    "WATER_NEED": "Water Need",
+    "AVAILABLE_COUNT": "{{count}} Available"
   },
   "CROPS": {
     "TITLE": "Crop Trends",
@@ -116,8 +133,17 @@
       "ALL_DISTRICTS": "All",
       "DISTRICT_LABEL": "District",
       "NO_DATA": "No data available",
-      "MODAL_PRICE": "Modal Price (₹)"
-    }
+      "MODAL_PRICE": "Modal Price (₹)",
+      "MANDI_RATES": "Live Mandi Rates",
+      "LOADING_PRICES": "Loading mandi prices...",
+      "TABLE_MANDI": "Mandi",
+      "TABLE_DISTRICT": "District",
+      "TABLE_MIN_MAX": "Min / Max Price",
+      "TABLE_MODAL": "Modal Rate",
+      "NO_MANDI_DATA": "No active Mandi rate listings found for this crop in the selected district.",
+      "FETCHING_DETAILS": "Fetching crop details..."
+    },
+    "LOADING_CROPS": "Loading market crops..."
   },
   "PREDICTIONS": {
     "TITLE": "Predictions & Recommendations",
@@ -183,5 +209,15 @@
     "FILTER": "Filter",
     "NO_DATA": "No data available",
     "QUINTAL": "quintal"
+  },
+  "ALERTS": {
+    "HEADER": "Farming Alerts & Tips",
+    "NEW_COUNT": "{{count}} New Alerts",
+    "WARNING_TITLE": "Heavy Rain Warning",
+    "WARNING_DESC": "Secure onion harvest in Nashik; rains expected within 12h.",
+    "SPIKE_TITLE": "Market Price Spike",
+    "SPIKE_DESC": "Wheat modal prices spiked by ₹120/quintal in Solapur.",
+    "INFO_TITLE": "Farming Advisory",
+    "INFO_DESC": "Ideal time to sow Rabi crops. Check profit insights."
   }
 }

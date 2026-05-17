@@ -40,7 +40,7 @@ import { CropService, Crop } from '../../core/services/crop.service';
       @if (loading()) {
         <div class="spinner-container">
           <mat-spinner diameter="48" strokeWidth="4"></mat-spinner>
-          <span>Loading market crops...</span>
+          <span>{{ 'CROPS.LOADING_CROPS' | translate }}</span>
         </div>
       } @else {
         <div class="crops-grid">

@@ -71,25 +71,25 @@ import { forkJoin } from 'rxjs';
             </div>
             
             <div class="weather-body">
-              <div class="temperature">31°C</div>
+              <div class="temperature">{{ 'DASHBOARD.TEMP' | translate }}</div>
               <div class="weather-condition">
-                <span class="condition">Sunny & Warm</span>
-                <span class="desc">Perfect humidity for sowing seeds</span>
+                <span class="condition">{{ 'DASHBOARD.WEATHER_COND' | translate }}</span>
+                <span class="desc">{{ 'DASHBOARD.WEATHER_DESC' | translate }}</span>
               </div>
             </div>
 
             <div class="weather-footer">
               <div class="metric">
                 <span class="metric-val">62%</span>
-                <span class="metric-label">Humidity</span>
+                <span class="metric-label">{{ 'DASHBOARD.METRIC_HUMIDITY' | translate }}</span>
               </div>
               <div class="metric">
                 <span class="metric-val">12 km/h</span>
-                <span class="metric-label">Wind</span>
+                <span class="metric-label">{{ 'DASHBOARD.METRIC_WIND' | translate }}</span>
               </div>
               <div class="metric">
                 <span class="metric-val">15%</span>
-                <span class="metric-label">Rain Prob.</span>
+                <span class="metric-label">{{ 'DASHBOARD.METRIC_RAIN_PROB' | translate }}</span>
               </div>
             </div>
           </div>
@@ -200,29 +200,29 @@ import { forkJoin } from 'rxjs';
           <!-- Agriculture Advisories Card -->
           <mat-card class="advisory-card animate-fade-in-up" style="animation-delay: 0.4s">
             <mat-card-header>
-              <mat-card-title>Weekly Farming Advisory</mat-card-title>
-              <mat-card-subtitle>Expert recommendations for {{ authService.currentUser()?.district || 'Solapur' }} region</mat-card-subtitle>
+              <mat-card-title>{{ 'DASHBOARD.ADVISORY_TITLE' | translate }}</mat-card-title>
+              <mat-card-subtitle>{{ 'DASHBOARD.ADVISORY_SUBTITLE' | translate:{district: authService.currentUser()?.district || 'Solapur'} }}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
               <div class="advisory-list">
                 <div class="advisory-item">
                   <mat-icon class="advisory-bullet">tips_and_updates</mat-icon>
                   <div class="advisory-text">
-                    <strong>Crop Rotation:</strong> Consider sowing pulses or legumes after rice harvest to restore nitrogen levels naturally and cut fertilizer costs by 20%.
+                    <strong>{{ 'DASHBOARD.ADV_ROTATION_TITLE' | translate }}</strong> {{ 'DASHBOARD.ADV_ROTATION_DESC' | translate }}
                   </div>
                 </div>
                 <mat-divider></mat-divider>
                 <div class="advisory-item">
                   <mat-icon class="advisory-bullet">water_drop</mat-icon>
                   <div class="advisory-text">
-                    <strong>Drip Irrigation:</strong> For onion crops in Pune, utilize drip systems between 6 AM and 9 AM to reduce water wastage and boost yield size.
+                    <strong>{{ 'DASHBOARD.ADV_DRIP_TITLE' | translate }}</strong> {{ 'DASHBOARD.ADV_DRIP_DESC' | translate }}
                   </div>
                 </div>
                 <mat-divider></mat-divider>
                 <div class="advisory-item">
                   <mat-icon class="advisory-bullet">bug_report</mat-icon>
                   <div class="advisory-text">
-                    <strong>Organic Pest Control:</strong> Spray neem-oil mix (10ml per litre of water) to protect young tomato leaves from thrips and whiteflies safely.
+                    <strong>{{ 'DASHBOARD.ADV_PEST_TITLE' | translate }}</strong> {{ 'DASHBOARD.ADV_PEST_DESC' | translate }}
                   </div>
                 </div>
               </div>
@@ -233,7 +233,7 @@ import { forkJoin } from 'rxjs';
         <!-- Crops Section Title -->
         <div class="section-heading-container animate-fade-in-up" style="animation-delay: 0.45s">
           <h2 class="section-title">{{ 'DASHBOARD.TRACKED_CROPS' | translate }}</h2>
-          <span class="badge-tag">{{ crops().length }} Available</span>
+          <span class="badge-tag">{{ 'DASHBOARD.AVAILABLE_COUNT' | translate:{count: crops().length} }}</span>
         </div>
 
         <!-- Crops Cards Grid -->
@@ -258,7 +258,7 @@ import { forkJoin } from 'rxjs';
                   </div>
                   <div class="crop-detail-stat">
                     <span class="stat-num">Medium</span>
-                    <span class="stat-txt">Water Need</span>
+                    <span class="stat-txt">{{ 'DASHBOARD.WATER_NEED' | translate }}</span>
                   </div>
                 </div>
               </mat-card-content>
